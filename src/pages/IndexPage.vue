@@ -29,18 +29,18 @@
     </div>
     <!-- Status Banner -->
     <q-banner
-      :class="isIsolated ? 'bg-positive' : 'bg-negative'"
+      :class="isIsolated && !isMobile ? 'bg-positive' : 'bg-negative'"
       class="text-white rounded-borders banner-status"
       dense
     >
       <template v-slot:avatar>
-        <q-icon :name="isIsolated ? 'check_circle' : 'warning'" size="md" />
+        <q-icon :name="isIsolated && !isMobile ? 'check_circle' : 'warning'" size="md" />
       </template>
       <div class="text-weight-medium">
         {{
-          isIsolated
+          isIsolated && !isMobile
             ? t('pandaCompress.status.secureConfigured')
-            : t('pandaCompress.status.blockingFFmpeg')
+            : t('pandaCompress.status.mobileNotSupported')
         }}
       </div>
     </q-banner>
@@ -214,6 +214,8 @@ const formatOptions = ref([
 const isLoading = ref(false);
 const loaded = ref(false);
 const isIsolated = ref(false);
+const isMobile = ref(false);
+
 const ffmpegLogs = ref<string[]>([]);
 const terminalOutput = ref<HTMLElement>();
 
@@ -224,6 +226,7 @@ const ffmpeg = new FFmpeg<FFmpegConfigurationGPLExtended>({
 onMounted(() => {
   // Check if browser supports SharedArrayBuffer for FFmpeg
   isIsolated.value = typeof SharedArrayBuffer !== 'undefined';
+  isMobile.value = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 });
 
 /**
@@ -261,6 +264,15 @@ const loadFFmpeg = () => {
 };
 
 const startCompression = async () => {
+  if (isMobile.value) {
+    $q.notify({
+      type: 'negative',
+      message: t('pandaCompress.notifications.mobileNotSupported'),
+      position: 'top',
+      timeout: 5000,
+    });
+    return;
+  }
   if (!videoFile.value) {
     $q.notify({
       type: 'warning',
