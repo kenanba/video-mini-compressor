@@ -8,6 +8,7 @@ export default {
     status: {
       secureConfigured: '✓ Browser-Sicherheit konfiguriert',
       blockingFFmpeg: '⚠ Browser blockiert FFmpeg - Deaktiviere Shields/Blocker',
+      mobileNotSupported: 'Video-Kompression auf mobilen Geräten wird derzeit nicht unterstützt.',
     },
 
     // Main Interface
@@ -82,9 +83,6 @@ export default {
       error: {
         title: '❌ Fehler',
         message: 'Fehler: {error}',
-      },
-      status: {
-        mobileNotSupported: 'Video-Kompression auf mobilen Geräten wird derzeit nicht unterstützt.',
       },
       noFile: {
         title: 'Keine Datei',
