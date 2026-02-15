@@ -3,7 +3,6 @@ export default {
     title: 'PandaCompress',
     subtitle: 'Professionelle Video-Kompression im Browser',
     info: 'Deine Videos werden **nur im Browser** verarbeitet – sie verlassen niemals dein Gerät. Keine Daten werden gespeichert, daher ist **kein Datenschutz-Risiko** vorhanden.',
-    mobileNotSupported: 'Video-Kompression auf mobilen Geräten wird derzeit nicht unterstützt.',
 
     // Status Banner
     status: {
@@ -83,6 +82,9 @@ export default {
       error: {
         title: '❌ Fehler',
         message: 'Fehler: {error}',
+      },
+      status: {
+        mobileNotSupported: 'Video-Kompression auf mobilen Geräten wird derzeit nicht unterstützt.',
       },
       noFile: {
         title: 'Keine Datei',

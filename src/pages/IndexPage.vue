@@ -267,7 +267,7 @@ const startCompression = async () => {
   if (isMobile.value) {
     $q.notify({
       type: 'negative',
-      message: t('pandaCompress.notifications.mobileNotSupported'),
+      message: t('pandaCompress.status.mobileNotSupported'),
       position: 'top',
       timeout: 5000,
     });
